@@ -67,14 +67,18 @@ const themes = {
   night: ["10, 10, 20", "255, 255, 255"],
 };
 // Adjusts theme on open according to users pc preference
-if (
-  window.matchMedia &&
-  window.matchMedia("(prefers-color-scheme: dark)").matches
-) {
-  htmlElements.settings.theme.value = "night";
-} else {
-  htmlElements.settings.theme.value = "day";
-}
+const changeTheme = () => {
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  ) {
+    htmlElements.settings.theme.value = "night";
+  } else {
+    htmlElements.settings.theme.value = "day";
+  }
+};
+
+changeTheme();
 
 htmlElements.settings.form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -114,7 +118,7 @@ htmlElements.settings.cancel.addEventListener("click", () => {
  * Add Event listener to show the book's details when the page loads.
  */
 
-function displayBookWithElements(book) {
+const displayBookWithElements = (book) => {
   const { author, id, image, title } = book;
   const authorName = authors[author];
 
@@ -142,7 +146,7 @@ function displayBookWithElements(book) {
             </div>
          `;
   return bookContainer;
-}
+};
 
 /**
  * Populate the book details in the preview modal overlay.
@@ -151,7 +155,7 @@ function displayBookWithElements(book) {
  * @param {book} book - The book object whose details will be displayed.
  */
 
-function showBookDetails(book) {
+const showBookDetails = (book) => {
   const { image, title, author, published, description } = book;
 
   const publishedDate = new Date(published);
@@ -161,7 +165,7 @@ function showBookDetails(book) {
   htmlElements.preview.title.textContent = title;
   htmlElements.preview.subtitle.textContent = `${authors[author]} (${year})`;
   htmlElements.preview.description.textContent = description;
-}
+};
 /**
  * Event listener to open the book details modal overlay when a book is clicked.
  */
@@ -180,7 +184,7 @@ htmlElements.preview.close.addEventListener("click", () => {
  * Displays books in the main container based on the current genre and pagination.
  */
 
-function displayAllBooks() {
+const displayAllBooks = () => {
   htmlElements.main.items.innerHTML = "";
 
   // Calculate the remaining books to show based on the current genre
@@ -218,19 +222,19 @@ function displayAllBooks() {
   if (remainingBooks - booksToDisplay <= 0) {
     htmlElements.main.button.disabled = true;
   }
-}
+};
 
 /**
  * Opens the search overlay and optionally resets search fields.
  */
-function openSearchOverlay() {
+const openSearchOverlay = () => {
   htmlElements.search.title.value = "";
   htmlElements.search.genre.value = "";
   htmlElements.search.author.value = "";
 
   // Show the search overlay
   htmlElements.search.overlay.style.display = "block";
-}
+};
 
 // This event listener opens the search overlay when a button is clicked
 htmlElements.header.search.addEventListener("click", openSearchOverlay);
@@ -248,9 +252,9 @@ htmlElements.search.search.addEventListener("click", () => {
 /**
  * Closes the search overlay and hide it.
  */
-function closeSearchOverlay() {
+const closeSearchOverlay = () => {
   htmlElements.search.overlay.style.display = "none";
-}
+};
 htmlElements.search.cancel.addEventListener("click", closeSearchOverlay);
 
 // Event listener to close the search overlay when the search input is clicked
@@ -261,7 +265,7 @@ htmlElements.search.cancel.addEventListener("click", () => {
 /**
  * Get the search input values and filter and display books based on search criteria.
  */
-function filterBooks() {
+const filterBooks = () => {
   const title = htmlElements.search.title.value.toLowerCase();
   const genreId = htmlElements.search.genre.value;
   const author = htmlElements.search.author.value.toLowerCase();
@@ -306,7 +310,7 @@ function filterBooks() {
 
   // Close the search overlay after filtering (optional)
   htmlElements.search.overlay.style.display = "none";
-}
+};
 
 // Event listener to trigger the filterBooks function when the search button is clicked
 htmlElements.search.search.addEventListener("click", (event) => {
@@ -320,7 +324,7 @@ htmlElements.search.form.addEventListener("submit", (event) => {
   filterBooks();
 });
 
-function populateAuthorOptions() {
+const populateAuthorOptions = () => {
   const authorSelect = htmlElements.search.author;
   authorSelect.innerHTML = '<option value="">All Authors</option>';
   for (const authorId in authors) {
@@ -332,12 +336,12 @@ function populateAuthorOptions() {
       authorSelect.appendChild(option);
     }
   }
-}
+};
 // Call the function to populate genre options
 populateAuthorOptions();
 
 //Function to populate the genre select element
-function populateGenreOptions() {
+const populateGenreOptions = () => {
   const genreSelect = htmlElements.search.genre;
   genreSelect.innerHTML = '<option value="">All Genres</option>';
 
@@ -350,7 +354,7 @@ function populateGenreOptions() {
       genreSelect.appendChild(option);
     }
   }
-}
+};
 
 // Call the function to populate genre and author options
 populateGenreOptions();
