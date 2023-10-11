@@ -22,7 +22,7 @@ const handleSubmit = (event) => {
     document.body.innerHTML =
       "Something critical went wrong. Please reload the page";
     console.error(new Error("You can only used numbers."));
-  } else if (divider < 0) {
+  } else if (divider <= 0) {
     result.innerText =
       "Division not performed. Invalid number provided. Try again.";
     console.error(new Error("Invalid number provided."));
