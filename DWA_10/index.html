@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.10.0/cdn/themes/light.css" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.10.0/cdn/shoelace-autoloader.js"></script>
+    <script type="module" src="./script.js"></script>
+    <title>Tally</title>
+</head>
+<body>
+    
+    <main>
+        <div class="tally-section">
+            <input readonly value="0" data-number-input></input>
+            <sl-button data-add-sign>+</sl-button>
+            <sl-button  data-subtract-sign>-</sl-button>
+            <sl-button data-reset-input>reset</sl-button>
+        </div>
+    </main> 
+    <div id="popup" class="popup" style="display: none;">
+        <div class="popup-content">
+            <p>Counter has been reset.</p>
+        </div>
+    </div>
+</body>
+</html>
